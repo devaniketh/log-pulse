@@ -1,10 +1,16 @@
-
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
 }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+model Log {
+  id    Int     @id @default(autoincrement())
+  timestamp   DateTime    @default(now())
+  level       String
+  message     String
+  source      String?
 }
